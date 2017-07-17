@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-stationName = "nacionalrock";
+stationName = "FMLaPatriadaDemo";
 
 var app = {
     // Application Constructor
@@ -36,7 +36,6 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 	var program_name = '';
-	//StatusBar.hide();
 	if(device.platform == "Android") {
 	        app.clearNotification();
 	}
@@ -44,10 +43,10 @@ var app = {
 	if(device.platform == "Android") {
 	// Android customization
 		cordova.plugins.backgroundMode.setDefaults({
-			title  : 'Nacional Rock',
-			ticker : 'Nacional Rock',
+			title  : 'FM La Patriada Demo',
+			ticker : 'FM La Patriada Demo',
 			text   : '',
-			isPublic: true,
+			isPublic: true
 		});
 
 	        app.clearNotification();
@@ -73,7 +72,7 @@ var app = {
 		navigator.notification.confirm(
 			("Desea salir?"), // message
 			alertexit, // callback
-			'Nacional Rock', // title
+			'FM La Patriada Demo', // title
 			['Sí', 'No'] // buttonName
 		);
 	}
@@ -99,39 +98,39 @@ var app = {
 	});
 
 	function getConfig(){
-		$.ajax({
-			url: url,
-			global: false,
-			type: "GET",
-			dataType: "json",
-			async:true,
-		})
-		.success(function(data){
-			//alert('Ajax request worked');
+		//$.ajax({
+		//	url: url,
+		//	global: false,
+		//	type: "GET",
+		//	dataType: "json",
+		//	async:true
+		//})
+		//.success(function(data){
+		var data = {};
 			appSetup(data);
-		})
-		.error(function(){
-			setTimeout (getConfig, $.ajaxSetup().retryAfter);
-		});
+		//})
+		//.error(function(){
+		//	setTimeout (getConfig, $.ajaxSetup().retryAfter);
+		//});
 	}
 
 	function appSetup(config) {
 		// Set streamURL as a global variable to be used by player
-		if (config.streamurl) {
-			window.streamURL = config.streamurl;
-		}
-		if (config.facebook) {
-			window.facebook = config.facebook;
-		}
-		if (config.twitter) {
-			window.twitter = config.twitter;
-		}
-		if (config.web) {
-			window.web = config.web;
-		}
-		if (config.email) {
-			window.email = config.email;
-		}
+		//if (config.streamurl) {
+		//	window.streamURL = config.streamurl;
+		//}
+		//if (config.facebook) {
+		//	window.facebook = config.facebook;
+		//}
+		//if (config.twitter) {
+		//	window.twitter = config.twitter;
+		//}
+		//if (config.web) {
+		//	window.web = config.web;
+		//}
+		//if (config.email) {
+		//	window.email = config.email;
+		//}
 		setBackgroundImage(config.image);
 		if (config.logourl) {
 			setLogoImage(config.logourl);
@@ -144,10 +143,10 @@ var app = {
 
 	// Set background image
 	function setBackgroundImage(url) {
-		$("html").css({'background-image':"url('"+url+"')"});
+		//$("html").css({'background-image':"url('"+url+"')"});
 	}
 	function setLogoImage(url) {
-		$(".logo").attr('src', url);
+		//$(".logo").attr('src', url);
 	}
 	function setStreamURL(url) {
 		if (url) {
@@ -167,7 +166,6 @@ var app = {
         console.log('Received Event: ' + id);
     },
     notificationCallback: function () {
-            //window.plugins.toast.showShortBottom("Gracias por escucharnos! Volvé pronto ;-)");
     },
     showNotification: function() {
         cordova.plugins.notification.local.schedule({
@@ -267,7 +265,7 @@ function hideProgramInfo()
 {
                 $(".infopanel-container").css("visibility", "hidden");
                 $(".program-info").css("visibility", "hidden");
-		$(".program-image").css("visibility", "hidden");
+		//$(".program-image").css("visibility", "hidden");
 		$('#program-name').css("visibility", "hidden");
 		$('#program-presenter').css("visibility", "hidden");
 }

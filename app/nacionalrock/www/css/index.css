@@ -150,7 +150,7 @@ bottom: 0;
         padding-left:5%;
         padding-right:5%;
         margin: 0;
-        height: 15%;
+        height: 12%;
         /* position: relative; */
         /* dirty hack para pegar el footer al piso */
         position:absolute;
@@ -163,7 +163,7 @@ bottom: 0;
         height: 15%;
 }
 .main-container-main-content {
-        height: 35%;
+        height: 33%;
         padding-bottom: 5%;
         padding-top: 5%;
 }
@@ -183,7 +183,7 @@ bottom: 0;
 }
 
 .infopanel-container {
-height: 27%;
+height: 2%;
 width: 90%;
 padding-right: 5%;
 padding-left: 5%;
@@ -226,7 +226,7 @@ visibility: hidden;
 
 
 .brand-container {
-        width: 60%;
+        width: 65%;
         height: 100%;
         margin: 0 auto;
 }
@@ -290,7 +290,7 @@ visibility: hidden;
 }
 .program-image {
 display: block;
-visibility: hidden;
+/*visibility: hidden;*/
 }
 
 div#program-name, div#program-presenter {
@@ -306,8 +306,8 @@ a, a:hover, a:visited, a:active {
 
 .hole {
 background-color: rgb(83, 83, 83);
-width: 100%;
-height: 100%;
+width: 80%;
+height: 80%;
 margin-left: auto;
 margin-right: auto;
 top: 5.5%;
@@ -391,22 +391,22 @@ margin-left: 20px;
 }
 
 .flaticon-www:before {
-        content: "\e001";
+        content: "\f100";
 }
 .flaticon-email:before {
-        content: "\e002";
+        content: "\f101";
 }
 .flaticon-facebook:before {
-        content: "\e003";
+        content: "\f105";
 }
 .flaticon-play:before {
-        content: "\e004";
+        content: "\f104";
 }
 .flaticon-pause:before {
-        content: "\e005";
+        content: "\f103";
 }
 .flaticon-twitter:before {
-        content: "\e006";
+        content: "\f102";
 }
 
 

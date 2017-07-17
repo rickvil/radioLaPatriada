@@ -59,7 +59,7 @@ var html5audio = {
 			$("#playicon").removeClass("flaticon-play").addClass("flaticon-pause");
 			$(".play-button .triangle .glyph .glyph-icon").removeClass("flaticon-play").addClass("flaticon-pause");
 			$("div").removeClass('blink');
-			getProgramInfo();
+			//getProgramInfo();
 		}, false);
 		myaudio.addEventListener("ended", function() {
 			 navigator.notification.alert('Hay problemas con tu conexión a Internet.\nIntentá nuevamente.', this.onEnded, 'Desconectado', 'OK');
