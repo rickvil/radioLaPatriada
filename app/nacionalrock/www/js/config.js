@@ -1,7 +1,7 @@
 var contentServer = "http://rnadmin.xicnet.com";
 var streamURL     = "http://server4.stweb.tv:1935/lapatriada/live/playlist.m3u8";
 
-window.streamURL     = "http://www.stweb.tv/clientes/lapatriada";
+//window.streamURL     = "http://www.stweb.tv/clientes/lapatriada";
 
 // Make config variables global
 window.server = contentServer;
