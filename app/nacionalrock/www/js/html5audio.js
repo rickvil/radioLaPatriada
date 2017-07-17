@@ -1,11 +1,9 @@
-
 var playButton;
 var myaudio   = null;
 var isPlaying = false;
 var isWaiting = false;
 
-function onError(error) 
-{
+function onError(error){
 	console.log(error.message);
 }
 
@@ -21,12 +19,12 @@ function onConfirmRetry(button) {
 }
 
 var html5audio = {
-	play: function()
-	{
+	play: function(){
 		if(isWaiting) {
-			myaudio.stop()
+			myaudio.stop();
 			return;
 		}
+
 		myaudio = null;
 		myaudio = new Audio(window.streamURL);
 		myaudio.play();

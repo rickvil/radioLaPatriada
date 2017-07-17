@@ -21,13 +21,13 @@ var mediaAudio = {
 		isPlaying = false;
 		if(device.platform == "Android") {
 			// Disable in favour of background plugin
-                	app.clearNotification();
+			app.clearNotification();
 		}
 		hideProgramInfo();
 		myMedia.pause();
 		myMedia.release();
 	}
-}
+};
  
 function mediaStatus(e){
 	/*
@@ -46,6 +46,7 @@ function mediaStatus(e){
 		//$(".play-button .triangle .glyph .glyph-icon").removeClass("glyph-icon flaticon-play").addClass("glyph-icon flaticon-turn4 fa-spin");
 		return;
 	}
+
 	if(e==2) {
 		//$(".player-container .triangle i").removeClass("fa-circle-o-notch fa-spin").addClass("fa-pause");
 		$(".play-button .triangle .glyph .glyph-icon").removeClass("flaticon-play").addClass("flaticon-pause");
@@ -56,13 +57,16 @@ function mediaStatus(e){
 		//getProgramInfo();
 		return;
 	}
+
 	if(e==4) {
 		$(".play-button .triangle .glyph .glyph-icon").removeClass("flaticon-pause").addClass("flaticon-play");
 		$(".program-info").css("visibility", "hidden");
 	}
+
 	if(e==undefined) {
 		$(".play-button").removeClass("blink");
 	}
+
 	window.isPlaying = false;
 	return;
 }
