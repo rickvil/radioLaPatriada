@@ -170,6 +170,7 @@ bottom: 0;
 .main-container-brand {
         height: 15%;
         padding-top: 5%;
+        visibility: hidden;
 }
 
 
@@ -183,7 +184,7 @@ bottom: 0;
 }
 
 .infopanel-container {
-height: 2%;
+height: 15%;
 width: 90%;
 padding-right: 5%;
 padding-left: 5%;

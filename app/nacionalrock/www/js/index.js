@@ -37,7 +37,7 @@ var app = {
     onDeviceReady: function() {
 		var program_name = '';
 		if(device.platform == "Android") {
-				app.clearNotification();
+			app.clearNotification();
 		}
 
 		if(device.platform == "Android") {
@@ -87,7 +87,7 @@ var app = {
 		}
 
 		// Server to fetch config (background image and streamURL) from
-		var url = window.server + "/" + stationName + "/config.json?"+Math.random();
+		var url = 'http://www.fmlapatriada.com.ar/aplicacion/url_streaming/config.json';
 
 		// Fetch the config
 
@@ -97,27 +97,28 @@ var app = {
 		});
 
 		function getConfig(){
-			//$.ajax({
-			//	url: url,
-			//	global: false,
-			//	type: "GET",
-			//	dataType: "json",
-			//	async:true
-			//})
-			//.success(function(data){
-			var data = {};
+			console.log("getConfig: ", new Date());
+			console.log("getConfig");
+			$.ajax({
+				url: url,
+				global: false,
+				type: "GET",
+				dataType: "json",
+				async:true
+			})
+			.success(function(data){
 				appSetup(data);
-			//})
-			//.error(function(){
-			//	setTimeout (getConfig, $.ajaxSetup().retryAfter);
-			//});
+			})
+			.error(function(){
+				setTimeout (getConfig, $.ajaxSetup().retryAfter);
+			});
 		}
 
 		function appSetup(config) {
 			// Set streamURL as a global variable to be used by player
-			//if (config.streamurl) {
-			//	window.streamURL = config.streamurl;
-			//}
+			if (config.streamURL) {
+				window.streamURL = config.streamURL;
+			}
 			//if (config.facebook) {
 			//	window.facebook = config.facebook;
 			//}
@@ -130,12 +131,13 @@ var app = {
 			//if (config.email) {
 			//	window.email = config.email;
 			//}
-			setBackgroundImage(config.image);
-			if (config.logourl) {
-				setLogoImage(config.logourl);
-			}
-					$("#wrapper").css("display", "block");
-					$("#loading").css("display", "none");
+			//setBackgroundImage(config.image);
+			//if (config.logourl) {
+			//	setLogoImage(config.logourl);
+			//}
+
+			$("#wrapper").css("display", "block");
+			$("#loading").css("display", "none");
 		}
 
 		getConfig();
@@ -210,56 +212,172 @@ var app = {
     }
 };
 
-function getProgramInfo() {
-	if(window.isPlaying == false) {
-		return;
-	}
+function showPicDefault() {
+	var imageDefault = 'img/portada-programacion/default.png';
+	$(".program-image").attr("src", imageDefault);
+	$(".program-image").css("visibility", "visible");
+	$(".main-container-brand").css("visibility", "hidden");
+}
 
-	if(isPlaying) {
-		var url = window.server + "/" + stationName + "/now_playing.json?"+Math.random();
-		console.log("getProgramInfo url : " + url);
-		$.getJSON(url, function(data) {
+function showPicProgramacion(pathImage){
+	console.log("showPicProgramacion: ", pathImage);
+	$(".program-image").attr("src", pathImage);
+	$(".program-image").css("visibility", "visible");
+	$(".main-container-brand").css("visibility", "visible");
+}
 
-			if(data.name) {
-				$('#name').html(data.name);
-				$('#program-name').css("visibility", "visible");
-				if(app.program_name != data.name) {
-					cordova.plugins.backgroundMode.configure({text: data.name});
-					app.updateNotification(data.name);
+function searchImagePrograming(){
+	var date = new Date;
+	var hora = date.getHours();
+	if (horaPicNow != null && (hora >= horaPicNow.horaInicio && hora < horaPicNow.horaFin)){
+		console.log("Mantenemos la imagen");
+	}else{
+		listProgramming.forEach(function(program, index) {
+
+			if (hora >= program.horaInicio){
+				if (program.horaFin != null && hora < program.horaFin){
+					showPicProgramacion(program.imagen);
+					horaPicNow = {};
+					horaPicNow.horaInicio = program.horaInicio;
+					horaPicNow.horaFin = program.horaFin;
 				}
-			} else {
-				$('#program-name').css("visibility", "hidden");
+				else{
+					showPicDefault();
+				}
 			}
-
-			if(data.presenter) {
-					$('#presenter').html(data.presenter);
-					$('#program-presenter').css("visibility", "visible");
-			} else {
-					$('#program-presenter').css("visibility", "hidden");
-			}
-
-			if(data.show_labels) {
-				$('.infopanel-label').css("display", "inline");
-			} else {
-				$('.infopanel-label').css("display", "none");
-			}
-
-			if(data.image.length > 0) {
-				var image = data.image_url;
-				$(".program-image").attr("src", image);
-				$(".program-image").css("visibility", "visible");
-			}
-
-			$(".program-info").css("visibility", "visible");
-			$(".infopanel-container").css("visibility", "visible");
 		});
 	}
+}
+
+function existPicHours(pathPic) {
+	var existPicHours = false;
+	$.ajax({
+		url: pathPic,
+		success: function(data){
+			console.log('exists: ', pathPic);
+			existPicHours = true;
+		},
+		error: function(data){
+			console.log('does not exist: ', pathPic);
+			existPicHours = false;
+		},
+		async: false
+	});
+	return existPicHours;
+}
+
+function parseHours(hora){
+	if (hora.toString().length == 1){
+		hora = '0' + hora.toString();
+	}
+	return hora;
+}
+
+function generatePathImage(dia, hora){
+	hora = parseHours(hora);
+	return 'http://www.fmlapatriada.com.ar/aplicacion/imagenes/'+'0' + dia + '.' + hora + '.jpg';
+}
+
+function mappearProgramacion(){
+	var date = new Date;
+	var dia = date.getDay();
+	var pathImage = '';
+	var hayProgramaAnterior = false;
+	var listaDeProgramas = [];
+	var indice = 0;
+	for (var hora=0; hora < 24; hora++) {
+		pathImage = generatePathImage(dia, hora);
+		if(existPicHours(pathImage)){
+			var programacion = {};
+			programacion.horaInicio = hora;
+			programacion.horaFin = null;
+			programacion.imagen = pathImage;
+			listaDeProgramas.push(programacion);
+			if (!hayProgramaAnterior){
+				hayProgramaAnterior = true;
+			}else{
+				var indiceX = indice - 1;
+				var elemtnetoAnterior = listaDeProgramas[indiceX];
+				elemtnetoAnterior.horaFin = hora;
+			}
+			indice++;
+		}
+	}
+
+	if (indice != 0){
+		var ultimoElemento = listaDeProgramas[indice - 1];
+		ultimoElemento.horaFin = ultimoElemento.horaInicio + 1;
+	}
+
+	return listaDeProgramas;
+}
+
+function getProgramInfo() {
+	if (listProgramming.length == 0){
+		listProgramming = mappearProgramacion();
+		showPicDefault();
+	}else{
+		searchImagePrograming()
+	}
+
+	//if(window.isPlaying == false) {
+	//	return;
+	//}
+
+	//if(isPlaying) {
+	//	var url = window.server + "/" + stationName + "/now_playing.json?"+Math.random();
+	//	console.log("getProgramInfo url : " + url);
+	//	$.getJSON(url, function(data) {
+    //
+	//		if(data.name) {
+	//			$('#name').html(data.name);
+	//			$('#program-name').css("visibility", "visible");
+	//			if(app.program_name != data.name) {
+	//				cordova.plugins.backgroundMode.configure({text: data.name});
+	//				app.updateNotification(data.name);
+	//			}
+	//		} else {
+	//			$('#program-name').css("visibility", "hidden");
+	//		}
+    //
+	//		if(data.presenter) {
+	//				$('#presenter').html(data.presenter);
+	//				$('#program-presenter').css("visibility", "visible");
+	//		} else {
+	//				$('#program-presenter').css("visibility", "hidden");
+	//		}
+    //
+	//		if(data.show_labels) {
+	//			$('.infopanel-label').css("display", "inline");
+	//		} else {
+	//			$('.infopanel-label').css("display", "none");
+	//		}
+    //
+	//		if(data.image.length > 0) {
+	//			var image = data.image_url;
+	//			$(".program-image").attr("src", image);
+	//			$(".program-image").css("visibility", "visible");
+	//		}
+    //
+	//		$(".program-info").css("visibility", "visible");
+	//		$(".infopanel-container").css("visibility", "visible");
+	//	});
+	//}
+}
+
+
+function loadProgramacion() {
+	showPicDefault();
+	listProgramming = mappearProgramacion();
+	searchImagePrograming()
 }
 
 // Check for program info changes
 var checkInterval = 1;
 var timerUnit = 60000;
 var interval = setInterval(getProgramInfo, timerUnit * checkInterval);
+var listProgramming = [];
+var horaPicNow = null;
 
 function hideProgramInfo() {
 	$(".infopanel-container").css("visibility", "hidden");
