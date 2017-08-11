@@ -219,7 +219,7 @@ visibility: hidden;
 #program-presenter #presenter {
         color: white;
         font-weight: bold;
-        text-transform: uppercase;
+        /*text-transform: uppercase;*/
         font-family: 'Montserrat-Bold', Arial, Helvetica;
 }
 #program-name .display-table .reg-font, #program-presenter .display-table .reg-font  { font-family: 'Montserrat-Regular', Arial, Helvetica;}

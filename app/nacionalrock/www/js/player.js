@@ -8,7 +8,7 @@ var mediaAudio = {
 		console.log("streamURL in media plugin player : " + window.streamURL);
 		myMedia = new Media(window.streamURL, this.stop, mediaError, mediaStatus);
 		myMedia.play();     
-		//getProgramInfo();
+		getProgramInfo();
 		if(device.platform == "Android") {
 			// Disable in favour of background plugin
 			//app.showNotification();
@@ -23,7 +23,7 @@ var mediaAudio = {
 			// Disable in favour of background plugin
 			app.clearNotification();
 		}
-		hideProgramInfo();
+		//hideProgramInfo();
 		myMedia.pause();
 		myMedia.release();
 	}
@@ -54,7 +54,7 @@ function mediaStatus(e){
 		isPlaying = true; 
 		isStarting = false;
 		window.isPlaying = true; 
-		//getProgramInfo();
+		getProgramInfo();
 		return;
 	}
 
