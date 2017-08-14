@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.fm.lapatriada" version="6.0" versionCode="60" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>FM La Patriada Demo</name>
+<widget id="com.fm.lapatriada" version="1.0.0" versionCode="60" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>FM La Patriada</name>
     <description>
-        FM 102.1 Radio La Patriada
+        FM Radio La Patriada
     </description>
-    <author email="ricardodanielvil@gmail.com" href="http://xicnet.com/">
+    <author email="ricardodanielvil@gmail.com" href="https://github.com/rickvil">
         ricardodanielvil@gmail.com
     </author>
     <content src="index.html" />

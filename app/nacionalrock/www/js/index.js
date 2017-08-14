@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-stationName = "FMLaPatriadaDemo";
+stationName = "FMLaPatriada";
 
 var app = {
     // Application Constructor
@@ -43,8 +43,8 @@ var app = {
 		if(device.platform == "Android") {
 		// Android customization
 			cordova.plugins.backgroundMode.setDefaults({
-				title  : 'FM La Patriada Demo',
-				ticker : 'FM La Patriada Demo',
+				title  : 'FM La Patriada',
+				ticker : 'FM La Patriada',
 				text   : '',
 				isPublic: true
 			});
@@ -72,7 +72,7 @@ var app = {
 			navigator.notification.confirm(
 				("Desea salir?"), // message
 				alertexit, // callback
-				'FM La Patriada Demo', // title
+				'FM La Patriada', // title
 				['Sí', 'No'] // buttonName
 			);
 		}
@@ -87,7 +87,7 @@ var app = {
 		}
 
 		// Server to fetch config (background image and streamURL) from
-		var url = 'http://www.fmlapatriada.com.ar/aplicacion/url_streaming/config.json';
+		var url = window.server + '/url_streaming/config.json';
 
 		// Fetch the config
 
@@ -117,22 +117,6 @@ var app = {
 			if (config.streamURL) {
 				window.streamURL = config.streamURL;
 			}
-			//if (config.facebook) {
-			//	window.facebook = config.facebook;
-			//}
-			//if (config.twitter) {
-			//	window.twitter = config.twitter;
-			//}
-			//if (config.web) {urlProgram
-			//	window.web = config.web;
-			//}
-			//if (config.email) {
-			//	window.email = config.email;
-			//}
-			//setBackgroundImage(config.image);
-			//if (config.logourl) {
-			//	setLogoImage(config.logourl);
-			//}
 
 			$("#wrapper").css("display", "block");
 			$("#loading").css("display", "none");
@@ -141,7 +125,7 @@ var app = {
 		function getProgramListDay(){
 			var date = new Date;
 			var day = date.getDay();
-			var urlProgramDay = 'http://www.fmlapatriada.com.ar/aplicacion/imagenes/0' + day + '.json';
+			var urlProgramDay = window.server + '/imagenes/0' + day + '.json';
 
 			$.ajax({
 				url: urlProgramDay,
@@ -161,20 +145,6 @@ var app = {
 		getConfig();
 		getProgramListDay();
 
-		// Set background image
-		function setBackgroundImage(url) {
-			//$("html").css({'background-image':"url('"+url+"')"});
-		}
-
-		function setLogoImage(url) {
-			//$(".logo").attr('src', url);
-		}
-
-		function setStreamURL(url) {
-			if (url) {
-				window.streamURL = url;
-			}
-		}
 	},
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -299,7 +269,6 @@ function mappearProgramacion(data){
 }
 
 function getProgramInfo() {
-	expiraDemo();
 	if(window.isPlaying == false) {
 		return;
 	}

@@ -1,4 +1,4 @@
-var contentServer = "http://rnadmin.xicnet.com";
+var contentServer = "http://www.fmlapatriada.com.ar/aplicacion";
 var streamURL     = "http://server4.stweb.tv:1935/lapatriada/live/playlist.m3u8";
 
 //window.streamURL     = "http://www.stweb.tv/clientes/lapatriada";
