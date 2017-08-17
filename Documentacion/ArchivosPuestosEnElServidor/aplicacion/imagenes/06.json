@@ -1,0 +1,35 @@
+{
+  "dia": "SABADO",
+  "programacion": [
+    {
+      "horaIni": "08",
+      "horaFin": "10",
+      "imagen": "http://www.fmlapatriada.com.ar/aplicacion/imagenes/06.08.jpg"
+    },
+    {
+      "horaIni": "10",
+      "horaFin": "12",
+      "imagen": "http://www.fmlapatriada.com.ar/aplicacion/imagenes/06.10.jpg"
+    },
+    {
+      "horaIni": "12",
+      "horaFin": "14",
+      "imagen": "http://www.fmlapatriada.com.ar/aplicacion/imagenes/06.12.jpg"
+    },
+    {
+      "horaIni": "14",
+      "horaFin": "15",
+      "imagen": "http://www.fmlapatriada.com.ar/aplicacion/imagenes/06.14.jpg"
+    },
+    {
+      "horaIni": "15",
+      "horaFin": "16",
+      "imagen": "http://www.fmlapatriada.com.ar/aplicacion/imagenes/06.15.jpg"
+    },
+    {
+      "horaIni": "16",
+      "horaFin": "17",
+      "imagen": "http://www.fmlapatriada.com.ar/aplicacion/imagenes/06.16.jpg"
+    }
+  ]
+}

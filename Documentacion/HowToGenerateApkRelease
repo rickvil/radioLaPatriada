@@ -1,0 +1,14 @@
+1) Generar apk release
+ENVIRONMENT='prod' cordova build android -release
+
+2) Firmar App
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore keystore-FM-LaPatriada/lapatriada.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk lapatriada
+
+3) Ingresar Password: 
+l4patr1ada*!
+
+4) Alinear, necesitamos el build-tools usaremos
+/home/dora/Android/Sdk/build-tools/22.0.0/zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk platforms/android/build/outputs/apk/android-release-aligned.apk
+
+5) Path APK final (firmado y alineado) es: 
+platforms/android/build/outputs/apk/android-release-aligned.apk
