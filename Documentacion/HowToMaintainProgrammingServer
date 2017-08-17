@@ -1,0 +1,69 @@
+Este manual esta orientado a guiar en los pasos para hacer el mantenimiento de las imagenes de la programacion y la url del streaming en el servidor.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+Imagenes Programacion:
+
+Para las Imagenes que se mostraran en la App, necesitamos tener en cuenta dos items:
+
+- mantener los archivos
+	- 01.json -> (archivo que corresponde a la programacion del dia LUNES)
+	- 02.json -> (archivo que corresponde a la programacion del dia MARTES)
+	- 03.json -> (archivo que corresponde a la programacion del dia MIERCOLES)
+	- 04.json -> (archivo que corresponde a la programacion del dia JUEVES)
+	- 05.json -> (archivo que corresponde a la programacion del dia VIERNES)
+	- 06.json -> (archivo que corresponde a la programacion del dia SABADO)
+	- 07.json -> (archivo que corresponde a la programacion del dia DOMINGO)
+
+- disponer de una imagen que se acceda por medio de una url
+	- como por ejemplo: 'http://www.fmlapatriada.com.ar/aplicacion/imagenes/01.07.jpg'
+
+Para hacer un mantenimiento de los archivos *.json, notaran que estos tienen el nombre del dia de la semana (01.json = LUNES, 02.json = MARTES....... 07.json = Domingo).
+
+A los archivos se los puede ver y editar usando cualquier editor de texto (por ejemplo el Bloc de Nota)
+
+El formato que van a encontrar adentro es este:
+
+{
+  "dia": "LUNES",
+  "programacion": [
+    {
+      "horaIni": "07",
+      "horaFin": "09",
+      "imagen": "http://www.fmlapatriada.com.ar/aplicacion/imagenes/01.07.jpg"
+    },
+    {
+      "horaIni": "09",
+      "horaFin": "12",
+      "imagen": "http://www.fmlapatriada.com.ar/aplicacion/imagenes/01.09.jpg"
+    }
+  ]
+}
+
+
+- Si quieres editar la programación de un día, basta con abrir el archivo, y seguir con el patrón de la declaración de la programación no olvidarse de las llaves '{}' y de la coma en el caso de separar las llaves ','. Los datos que colocamos son la hora de inicio y de fin de un programa, y la url de donde se encuentre la imagen. Si quieres cambiar el horario de programación, no olvidese en actualizar los horarios de finalización del otro programa.
+
+- la 'horaIni' y 'horaFin' debe respetar el formato de tener dos digitos en formato de 24 hs, es decir, si un programa comienza a las 7 de la mañana, la hora se tendra que escribir '07', si el programa comienza a las 14 horas solo se escribira '14'
+
+- no olvidarse que la extension del archivo que se va a mostrar esta probado para extensiones 'jpg' y 'png'
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Url del streaming:
+
+Para hacer el mantenimiento de la Url del streaming basta con actualizar el archivo 'config.json'
+
+El archivo se los puede ver y editar usando cualquier editor de texto (por ejemplo el Bloc de Nota)
+
+El formato que se va a encontrar adentro de este es:
+
+{
+  "streamURL": "http://server4.stweb.tv:1935/lapatriada/live/playlist.m3u8"
+}
+
+- Basta con cambiar el valor de 'http://server4.stweb.tv:1935/lapatriada/live/playlist.m3u8'
+- Recordar que la url del streaming debe terminar en 'm3u8', no usar la url de streaming que viene embebido con el reproductor.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Cualquier consulta o Duda dirigirse al email 'ricardodanielvil@gmail.com'

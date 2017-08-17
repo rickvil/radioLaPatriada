@@ -1,0 +1,10 @@
+1) Pararse adentro del directorio '/App-FM-LaPatriada'
+
+2) Ejecutar el comando
+cordova platform add android
+
+3) para probar en un emulador
+cordova run android --emulator
+
+4) para probar en un dispositivo mobile (asegurarse de que este conectado con 'adb devices')
+cordova run android
