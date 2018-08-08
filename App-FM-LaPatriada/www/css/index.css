@@ -304,6 +304,17 @@ a, a:hover, a:visited, a:active {
         text-decoration: none;
 }
 
+.buttonCustom{
+    max-width: 75%;
+    display: block;
+    padding: 12px 8px;
+    background-color: #ff7f31;
+    font-size: 2em;
+    color: #ffffff;
+    margin: 15% auto 0;
+    text-align: center;
+    text-transform: uppercase;
+}
 
 .hole {
 background-color: rgb(83, 83, 83);

@@ -12,3 +12,4 @@ window.web = "http://www.fmlapatriada.com.ar/";
 window.email = "info@fmlapatriada.com.ar";
 window.isPlaying = false;
 window.whatsapp= "https://api.whatsapp.com/send?phone=5491122349672&text=Saludos%20Radio%20La%20Patriada";
+window.btnLink= "http://www.fmlapatriada.com.ar";

@@ -142,8 +142,27 @@ var app = {
 			});
 		}
 
+        function getConfigButton(){
+            var urlConfigButton = window.server + '/boton/button.json';
+
+            $.ajax({
+                url: urlConfigButton,
+                global: false,
+                type: "GET",
+                dataType: "json",
+                async:true
+            })
+			.success(function(data){
+                setValueButtonDashboard(data);
+			})
+			.error(function(){
+				setTimeout (getConfigButton, $.ajaxSetup().retryAfter);
+			});
+        }
+
 		getConfig();
 		getProgramListDay();
+        getConfigButton();
 
 	},
     // Update DOM on a Received Event
@@ -268,6 +287,23 @@ function mappearProgramacion(data){
 	});
 }
 
+function setValueButtonDashboard(data){
+    btnVisible= data.visible;
+    btnColor = data.color;
+    btnTitle = data.title;
+    window.btnLink = data.link;
+
+    // var listaDeProgramas  = data.programacion;
+	//
+    // listaDeProgramas.forEach(function(program, index) {
+    //     var programacion = {};
+    //     programacion.horaIni = parseInt(program.horaIni);
+    //     programacion.horaFin = parseInt(program.horaFin);
+    //     programacion.imagen = program.imagen;
+    //     listProgramming.push(programacion);
+    // });
+}
+
 function getProgramInfo() {
 	if(window.isPlaying == false) {
 		return;
@@ -288,6 +324,10 @@ var timerUnit = 60000;
 var interval = setInterval(getProgramInfo, timerUnit * checkInterval);
 var listProgramming = [];
 var horaPicNow = null;
+
+var btnVisible = 'false';
+var btnColor = '';
+var btnTitle = '';
 
 function hideProgramInfo() {
 	$(".infopanel-container").css("visibility", "hidden");
