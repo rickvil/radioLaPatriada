@@ -66,4 +66,29 @@ El formato que se va a encontrar adentro de este es:
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
+Boton personalizable del Dashboard:
+
+Para hacer el mantenimiento boton basta con actualizar el archivo 'button.json'
+
+El archivo se los puede ver y editar usando cualquier editor de texto (por ejemplo el Bloc de Nota)
+
+El formato que se va a encontrar adentro de este es:
+
+{
+  "visible": "true",
+  "color": "#ff7f31",
+  "title": "SUSCRIBITE A LA PATRIADA",
+  "link": "http://www.fmlapatriada.com.ar/suscripciones"
+}
+
+- las opciones que se pueden configurar son:
+  "visible" -> aqui se configura si el boton se puede ver o no en la pantalla. Los valores que se tienen que escribir son:
+        "true" (si queremos que si se vea el boton)
+        "false" (si NO queremos que se vea el boton)
+  "color" -> aqui se configura el color del boton, tiene que ser en formato HEXADECIMAL, y el codigo de color elegido tiene que ser con el prefijo ' # ' SI o SI para que funcione la aplicacion. Por defecto tiene el color de la radio que es '#53b1b8'
+  "title" -> aqui se coloca el texto que querramos ver en el boton
+  "link" -> aqui se coloca la url que querramos que se abra al momento de hacer click en el boton
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
 Cualquier consulta o Duda dirigirse al email 'ricardodanielvil@gmail.com'
