@@ -2,7 +2,7 @@
 ENVIRONMENT='prod' cordova build android -release
 
 2) Firmar App
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore keystore-FM-LaPatriada/lapatriada.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk lapatriada
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../keystore-FM-LaPatriada/lapatriada.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk lapatriada
 
 3) Ingresar Password: 
 l4patr1ada*!
