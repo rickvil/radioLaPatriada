@@ -308,12 +308,13 @@ a, a:hover, a:visited, a:active {
     max-width: 75%;
     display: block;
     padding: 12px 8px;
-    background-color: #ff7f31;
+    background-color: #53b1b8;
     font-size: 2em;
     color: #ffffff;
     margin: 15% auto 0;
     text-align: center;
     text-transform: uppercase;
+    visibility: hidden;
 }
 
 .hole {

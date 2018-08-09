@@ -153,7 +153,7 @@ var app = {
                 async:true
             })
 			.success(function(data){
-                setValueButtonDashboard(data);
+                setValueButtonCustom(data);
 			})
 			.error(function(){
 				setTimeout (getConfigButton, $.ajaxSetup().retryAfter);
@@ -287,21 +287,20 @@ function mappearProgramacion(data){
 	});
 }
 
-function setValueButtonDashboard(data){
-    btnVisible= data.visible;
-    btnColor = data.color;
-    btnTitle = data.title;
-    window.btnLink = data.link;
+function setValueButtonCustom(data){
 
-    // var listaDeProgramas  = data.programacion;
-	//
-    // listaDeProgramas.forEach(function(program, index) {
-    //     var programacion = {};
-    //     programacion.horaIni = parseInt(program.horaIni);
-    //     programacion.horaFin = parseInt(program.horaFin);
-    //     programacion.imagen = program.imagen;
-    //     listProgramming.push(programacion);
-    // });
+    btnCustomVisible = data.visible;
+    btnCustomColor = data.color;
+    btnCustomTitle = data.title;
+    window.btnCustomLink = data.link;
+
+	if (btnCustomVisible == "true"){
+        $('#btnCustom').css("visibility", "visible");
+        $('#btnCustom').css("background-color", btnCustomColor);
+        $('#btnCustom').text(btnCustomTitle);
+	} else {
+        $('#btnCustom').css("visibility", "hidden");
+	}
 }
 
 function getProgramInfo() {
@@ -325,9 +324,9 @@ var interval = setInterval(getProgramInfo, timerUnit * checkInterval);
 var listProgramming = [];
 var horaPicNow = null;
 
-var btnVisible = 'false';
-var btnColor = '';
-var btnTitle = '';
+var btnCustomVisible = 'false';
+var btnCustomColor = '';
+var btnCustomTitle = '';
 
 function hideProgramInfo() {
 	$(".infopanel-container").css("visibility", "hidden");
