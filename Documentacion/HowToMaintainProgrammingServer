@@ -89,6 +89,7 @@ El formato que se va a encontrar adentro de este es:
   "title" -> aqui se coloca el texto que querramos ver en el boton
   "link" -> aqui se coloca la url que querramos que se abra al momento de hacer click en el boton
 
+El color de la letras del boton siempre va a ser Blanco, esto esta configurado por defecto en la app
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 Cualquier consulta o Duda dirigirse al email 'ricardodanielvil@gmail.com'
