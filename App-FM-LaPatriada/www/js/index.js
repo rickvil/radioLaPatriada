@@ -295,10 +295,12 @@ function setValueButtonCustom(data){
     window.btnCustomLink = data.link;
 
 	if (btnCustomVisible == "true"){
+        $('.main-container-brand').remove();
         $('#btnCustom').css("visibility", "visible");
         $('#btnCustom').css("background-color", btnCustomColor);
         $('#btnCustom').text(btnCustomTitle);
 	} else {
+        $('.main-container-custom').remove();
         $('#btnCustom').css("visibility", "hidden");
 	}
 }
