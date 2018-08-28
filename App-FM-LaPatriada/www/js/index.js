@@ -87,7 +87,7 @@ var app = {
 		}
 
 		// Server to fetch config (background image and streamURL) from
-		var url = window.server + '/url_streaming/config.json';
+		var url = window.server + '/url_streaming/config.json?t='+(new Date()).getTime();
 
 		// Fetch the config
 
@@ -123,9 +123,9 @@ var app = {
 		}
 
 		function getProgramListDay(){
-			var date = new Date;
+			var date = new Date();
 			var day = date.getDay();
-			var urlProgramDay = window.server + '/imagenes/0' + day + '.json';
+			var urlProgramDay = window.server + '/imagenes/0' + day + '.json?t='+(new Date()).getTime();
 
 			$.ajax({
 				url: urlProgramDay,
@@ -143,7 +143,7 @@ var app = {
 		}
 
         function getConfigButton(){
-            var urlConfigButton = window.server + '/boton/button.json';
+            var urlConfigButton = window.server + '/boton/button.json?t='+(new Date()).getTime();
 
             $.ajax({
                 url: urlConfigButton,
@@ -217,7 +217,7 @@ var app = {
 
 function showPicDefault() {
     var imageDefault = 'img/portada-programacion/default.png';
-    var pathImageDefaultServer = window.server + '/imagenes/default.png';
+    var pathImageDefaultServer = window.server + '/imagenes/default.png?t='+(new Date()).getTime();
 
     if (existPicHours(pathImageDefaultServer)){
         imageDefault = pathImageDefaultServer;
@@ -232,8 +232,11 @@ function showPicDefault() {
 
 function showPicProgramacion(pathImage){
 // quitando el siguiende if-else, se podria optimizar mas aun la carga de la imagen
-	if (existPicHours(pathImage)){
-		$(".program-image").attr("src", pathImage);
+
+	var tmpPathImage = pathImage + '?t=' + (new Date()).getTime();
+
+	if (existPicHours(tmpPathImage)){
+		$(".program-image").attr("src", tmpPathImage);
 		$(".program-image").css("visibility", "visible");
 		$(".main-container-brand").css("visibility", "visible");
 	}else{
@@ -242,7 +245,7 @@ function showPicProgramacion(pathImage){
 }
 
 function searchImagePrograming(){
-	var date = new Date;
+	var date = new Date();
 	var hora = date.getHours();
 	if (horaPicNow != null && (hora >= horaPicNow.horaIni && hora < horaPicNow.horaFin)){
 		console.log("Mantenemos la imagen");
