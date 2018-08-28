@@ -160,10 +160,10 @@ var app = {
 			});
         }
 
+        showPicDefault();
 		getConfig();
 		getProgramListDay();
         getConfigButton();
-
 	},
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -216,10 +216,18 @@ var app = {
 };
 
 function showPicDefault() {
-	var imageDefault = 'img/portada-programacion/default.png';
-	$(".program-image").attr("src", imageDefault);
-	$(".program-image").css("visibility", "visible");
-	$(".main-container-brand").css("visibility", "hidden");
+    var imageDefault = 'img/portada-programacion/default.png';
+    var pathImageDefaultServer = window.server + '/imagenes/default.png';
+
+    if (existPicHours(pathImageDefaultServer)){
+        imageDefault = pathImageDefaultServer;
+    }
+
+    $(".program-image").attr("src", imageDefault);
+    $("#fondoSmall").attr("src", imageDefault);
+
+    $(".program-image").css("visibility", "visible");
+    $(".main-container-brand").css("visibility", "hidden");
 }
 
 function showPicProgramacion(pathImage){
