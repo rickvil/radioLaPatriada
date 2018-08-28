@@ -8,7 +8,7 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../keystore-FM-
 l4patr1ada*!
 
 4) Alinear, necesitamos el build-tools usaremos
-/home/dora/Android/Sdk/build-tools/26.0.2/zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk platforms/android/build/outputs/apk/android-release-aligned.apk
+/home/rickvil/Android/Sdk/build-tools/26.0.2/zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk platforms/android/build/outputs/apk/android-release-aligned.apk
 
 5) Path APK final (firmado y alineado) es: 
 platforms/android/build/outputs/apk/android-release-aligned.apk

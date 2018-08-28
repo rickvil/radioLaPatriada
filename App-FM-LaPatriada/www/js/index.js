@@ -322,7 +322,7 @@ function getProgramInfo() {
 		if (listProgramming.length == 0){
 			showPicDefault();
 		}else{
-			searchImagePrograming()
+			searchImagePrograming();
 		}
 	}
 }
