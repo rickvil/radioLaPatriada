@@ -1,0 +1,7 @@
+{
+  "name": "laPatriada",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
