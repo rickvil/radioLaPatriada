@@ -1,5 +1,10 @@
 ion-content{
-  --ion-background-color:#53b1b8;
+  //--ion-background-color:#53b1b8;
+  --ion-background-color: transparent;
+  background-image: url('../../assets/img/background/fondo.png');
+  -webkit-background-image: url('../../assets/img/background/fondo.png');
+  background-repeat: no-repeat;
+  background-size:cover;
 }
 
 //ion-icon {
@@ -7,6 +12,11 @@ ion-content{
 //}
 
 .section-play {
+  position: relative;
+  margin-top: 60px;
+}
+
+.section-stop {
   position: relative;
   margin-top: 60px;
 }

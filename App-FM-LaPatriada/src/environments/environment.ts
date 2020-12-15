@@ -3,7 +3,21 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  contentServer: 'http://www.fmlapatriada.com.ar/aplicacion',
+  streamURL: 'http://server4.stweb.tv:1935/lapatriada/live/playlist.m3u8',
+  // streamURL: 'http://www.stweb.tv/clientes/lapatriada',
+
+// Make config variables global
+  server: 'http://www.fmlapatriada.com.ar/aplicacion',
+  facebook: 'https://www.facebook.com/fmlapatriada',
+  twitter: 'FMLaPatriada',
+  web: 'http://www.fmlapatriada.com.ar/',
+  email: 'info@fmlapatriada.com.ar',
+  isPlaying: false,
+  whatsapp: 'https://api.whatsapp.com/send?phone=5491122349672&text=Saludos%20Radio%20La%20Patriada',
+  btnCustomLink: 'http://www.fmlapatriada.com.ar'
 };
 
 /*

@@ -1,8 +1,14 @@
 <ion-content [fullscreen]="true">
   <div id="container">
-    <div class="section-play">
-      <ion-button shape="round" color="primary" size="large" class="button-app">
+    <div class="section-play" *ngIf="!isPlay">
+      <ion-button shape="round" color="primary" size="large" class="button-app" (click)="play()">
         <ion-icon name="play-circle-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="section-stop" *ngIf="isPlay">
+      <ion-button shape="round" color="primary" size="large" class="button-app" (click)="stop()">
+        <ion-icon name="pause-circle-outline"></ion-icon>
       </ion-button>
     </div>
 
