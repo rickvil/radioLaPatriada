@@ -21,7 +21,7 @@ export class HomePage {
   constructor(private audioService: AudioService) {
     // this.openUrl('https://server.laradio.online/proxy/fm_la_ppatriada?mp=/stream');
     // this.openUrl('http://www.stweb.tv/clientes/lapatriada/');
-    this.openUrl('http://server4.stweb.tv:1935/lapatriada/live/playlist.m3u8');
+    // this.openUrl('http://server4.stweb.tv:1935/lapatriada/live/playlist.m3u8');
   }
 
   openUrl(url){
@@ -35,6 +35,9 @@ export class HomePage {
   }
 
   play() {
+    this.openUrl('https://server.laradio.online/proxy/fm_la_patriada?mp=/stream');
+    // this.openUrl('http://www.stweb.tv/clientes/lapatriada');
+    // this.openUrl('http://server4.stweb.tv:1935/lapatriada/live/playlist.m3u8');
     this.audioService.play();
     this.isPlay = true;
   }

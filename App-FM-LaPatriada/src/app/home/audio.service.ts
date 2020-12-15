@@ -75,17 +75,7 @@ export class AudioService {
     }
 
     play() {
-        // this.audioObj.play();
-
-        const playPromise = this.audioObj.play();
-
-        if (playPromise !== undefined) {
-            playPromise.then(algo => {
-                console.log('algo: ', algo);
-            }).catch(error => {
-                console.log('error: ', error);
-                });
-        }
+        this.audioObj.play();
     }
 
     pause() {
@@ -104,7 +94,6 @@ export class AudioService {
     //     const momentTime = time * 1000;
     //     return moment.utc(momentTime).format(format);
     // }
-
 
     private updateStateEvents(event: Event): void {
         switch (event.type) {
