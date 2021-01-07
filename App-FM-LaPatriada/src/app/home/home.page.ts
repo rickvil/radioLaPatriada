@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AudioService} from './audio.service';
 
 export interface StreamState {
@@ -16,34 +16,23 @@ export interface StreamState {
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
   isPlay = false;
-  constructor(private audioService: AudioService) {
-    // this.openUrl('https://server.laradio.online/proxy/fm_la_ppatriada?mp=/stream');
-    // this.openUrl('http://www.stweb.tv/clientes/lapatriada/');
-    // this.openUrl('http://server4.stweb.tv:1935/lapatriada/live/playlist.m3u8');
+  _streamPaused:boolean
+  constructor(private mediaStreamClient: AudioService) {
   }
 
-  openUrl(url){
-    this.audioService.playStream(url).subscribe(algo => {
-      console.log('algo: ', algo);
-      // if (algo.type === 'error'){
-      //   console.log('se cago');
-      // }
-    });
-
+  ngOnInit() {
+    this.mediaStreamClient.streamPause.subscribe(e=>{
+      this._streamPaused = e
+    })
   }
 
   play() {
-    this.openUrl('https://server.laradio.online/proxy/fm_la_patriada?mp=/stream');
-    // this.openUrl('http://www.stweb.tv/clientes/lapatriada');
-    // this.openUrl('http://server4.stweb.tv:1935/lapatriada/live/playlist.m3u8');
-    this.audioService.play();
-    this.isPlay = true;
+      this.mediaStreamClient.resumeStream()
   }
 
   stop() {
-    this.audioService.stop();
-    this.isPlay = false;
+      this.mediaStreamClient.pauseStream()
   }
 }

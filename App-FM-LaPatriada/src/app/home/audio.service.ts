@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {BehaviorSubject, Subscription} from 'rxjs';
+import {HttpClient} from "@angular/common/http";
+import { Platform } from '@ionic/angular';
+import {Media} from "@ionic-native/media/ngx";
 
 export interface StreamState {
     playing: boolean;
@@ -16,123 +18,74 @@ export interface StreamState {
     providedIn: 'root'
 })
 export class AudioService {
-    private stop$ = new Subject();
-    private audioObj = new Audio();
-    audioEvents = [
-        'ended', 'error', 'play', 'playing', 'pause', 'timeupdate', 'canplay', 'loadedmetadata', 'loadstart'
-    ];
-    private state: StreamState = {
-        playing: false,
-        readableCurrentTime: '',
-        readableDuration: '',
-        duration: undefined,
-        currentTime: undefined,
-        canplay: false,
-        error: false,
-    };
 
-    stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
+    private streamUrl = { streamHttp: 'https://server.laradio.online/proxy/fm_la_patriada?mp=/stream', streamPort:'http://listen.181fm.com:'}
 
-    private streamObservable(url) {
-        return new Observable(observer => {
-            // Play audio
-            this.audioObj.src = url;
-            this.audioObj.load();
-            this.audioObj.play();
+    private notPlaying:boolean = false
+    private mediaFile: any
 
-            const handler = (event: Event) => {
-                this.updateStateEvents(event);
-                observer.next(event);
-            };
+    private uSubscriptions: Subscription
+    private readonly httpSubscriptions: Subscription
 
-            this.addEvents(this.audioObj, this.audioEvents, handler);
-            return () => {
-                // Stop Playing
-                this.audioObj.pause();
-                this.audioObj.currentTime = 0;
-                // remove event listeners
-                this.removeEvents(this.audioObj, this.audioEvents, handler);
-                // reset state
-                this.resetState();
-            };
-        });
+    public streamPause: BehaviorSubject<boolean> = new BehaviorSubject(this.notPlaying)
+
+    constructor(
+        private http: HttpClient,
+        private media: Media,
+        private platform: Platform)
+    {
+        this.httpSubscriptions = new Subscription()
+        this.uSubscriptions = new Subscription()
+        this.streamPause.next(this.notPlaying)
+        this.checkPlatform()
     }
 
-    private addEvents(obj, events, handler) {
-        events.forEach(event => {
-            obj.addEventListener(event, handler);
-        });
-    }
+    private checkPlatform(){
+        if(this.platform.is('mobile')||this.platform.is('mobileweb')){
+            delete this.media
+            this.mediaFile = new Audio()
 
-    private removeEvents(obj, events, handler) {
-        events.forEach(event => {
-            obj.removeEventListener(event, handler);
-        });
-    }
+            this.checkMediaFile = ()=>{
+                this.mediaFile.pause()
+                this.mediaFile.currentTime = 0
+            }
 
-    playStream(url) {
-        return this.streamObservable(url).pipe(takeUntil(this.stop$));
-    }
-
-    play() {
-        this.audioObj.play();
-    }
-
-    pause() {
-        this.audioObj.pause();
-    }
-
-    stop() {
-        this.stop$.next();
-    }
-
-    seekTo(seconds) {
-        this.audioObj.currentTime = seconds;
-    }
-
-    // formatTime(time: number, format: string = 'HH:mm:ss') {
-    //     const momentTime = time * 1000;
-    //     return moment.utc(momentTime).format(format);
-    // }
-
-    private updateStateEvents(event: Event): void {
-        switch (event.type) {
-            case 'canplay':
-                this.state.duration = this.audioObj.duration;
-                // this.state.readableDuration = this.formatTime(this.state.duration);
-                this.state.canplay = true;
-                break;
-            case 'playing':
-                this.state.playing = true;
-                break;
-            case 'pause':
-                this.state.playing = false;
-                break;
-            case 'timeupdate':
-                this.state.currentTime = this.audioObj.currentTime;
-                // this.state.readableCurrentTime = this.formatTime(this.state.currentTime);
-                break;
-            case 'error':
-                this.resetState();
-                this.state.error = true;
-                break;
+            this.setStreamSource = ()=>{
+                this.mediaFile.src = this.streamUrl.streamHttp
+            }
         }
-        this.stateChange.next(this.state);
     }
 
-    private resetState() {
-        this.state = {
-            playing: false,
-            readableCurrentTime: '',
-            readableDuration: '',
-            duration: undefined,
-            currentTime: undefined,
-            canplay: false,
-            error: false
-        };
+    private checkMediaFile(){
+        if (this.mediaFile != undefined) {
+            this.mediaFile.stop()
+            this.mediaFile.release()
+            this.mediaFile = null
+        }
     }
 
-    getState(): Observable<StreamState> {
-        return this.stateChange.asObservable();
+    private setStreamSource(){
+        this.mediaFile = this.media.create(this.streamUrl.streamHttp)
+    }
+
+    pauseStream() {
+        this.mediaFile.pause()
+        this.notPlaying = true
+        this.streamPause.next(this.notPlaying)
+    }
+
+    resumeStream() {
+        this.checkMediaFile()
+        this.setStreamSource()
+        this.die()
+        this.uSubscriptions.add(this.httpSubscriptions)
+        this.mediaFile.play()
+        this.notPlaying = false
+        this.streamPause.next(this.notPlaying)
+    }
+
+
+    private die() {
+        this.uSubscriptions.unsubscribe();
     }
 }
