@@ -17,8 +17,7 @@ export interface StreamState {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit{
-  isPlay = false;
-  _streamPaused:boolean
+  _streamPaused:boolean = true
   constructor(private mediaStreamClient: AudioService) {
   }
 
@@ -28,11 +27,11 @@ export class HomePage implements OnInit{
     })
   }
 
-  play() {
-      this.mediaStreamClient.resumeStream()
-  }
-
-  stop() {
+  streamStation() {
+    if(this._streamPaused != true){
       this.mediaStreamClient.pauseStream()
+    }else{
+      this.mediaStreamClient.resumeStream()
+    }
   }
 }

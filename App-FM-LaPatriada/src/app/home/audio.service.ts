@@ -19,9 +19,9 @@ export interface StreamState {
 })
 export class AudioService {
 
-    private streamUrl = { streamHttp: 'https://server.laradio.online/proxy/fm_la_patriada?mp=/stream', streamPort:'http://listen.181fm.com:'}
+    private streamUrl = 'https://server.laradio.online/proxy/fm_la_patriada?mp=/stream'
 
-    private notPlaying:boolean = false
+    private notPlaying:boolean = true
     private mediaFile: any
 
     private uSubscriptions: Subscription
@@ -51,7 +51,7 @@ export class AudioService {
             }
 
             this.setStreamSource = ()=>{
-                this.mediaFile.src = this.streamUrl.streamHttp
+                this.mediaFile.src = this.streamUrl
             }
         }
     }
@@ -65,7 +65,7 @@ export class AudioService {
     }
 
     private setStreamSource(){
-        this.mediaFile = this.media.create(this.streamUrl.streamHttp)
+        this.mediaFile = this.media.create(this.streamUrl)
     }
 
     pauseStream() {
